@@ -4,4 +4,4 @@ There are some docker-compose examples of deploying the cluster or the single se
 
 ## 1. redis
 
-[redis replication](./redis/redis-replica/)
+[redis replication](./redis/redis-replica/README.md)
