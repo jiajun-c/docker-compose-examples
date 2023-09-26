@@ -1,0 +1,29 @@
+version: "3"
+services:
+  node1:
+    image: redis
+    container_name: node1
+    restart: on-failure
+    volumes:
+      - ./volume/data:/data
+      - ./config/node1/redis.conf:/etc/redis/redis.conf
+    command: ["redis-server", "/etc/redis/redis.conf"]
+    network_mode: host
+  node2:
+    image: redis
+    container_name: node2
+    restart: on-failure
+    volumes:
+      - ./volume/data:/data
+      - ./config/node2/redis.conf:/etc/redis/redis.conf
+    command: [ "redis-server", "/etc/redis/redis.conf" ]
+    network_mode: host
+  node3:
+    image: redis
+    container_name: node3
+    restart: on-failure
+    volumes:
+      - ./volume/data:/data
+      - ./config/node3/redis.conf:/etc/redis/redis.conf
+    command: [ "redis-server", "/etc/redis/redis.conf" ]
+    network_mode: host
