@@ -5,7 +5,7 @@ services:
     container_name: node1
     restart: on-failure
     volumes:
-      - ./volume/data:/data
+      - ./volume/data1:/data1
       - ./config/node1/redis.conf:/etc/redis/redis.conf
     command: ["redis-server", "/etc/redis/redis.conf"]
     network_mode: host
@@ -14,7 +14,7 @@ services:
     container_name: node2
     restart: on-failure
     volumes:
-      - ./volume/data:/data
+      - ./volume/data2:/data2
       - ./config/node2/redis.conf:/etc/redis/redis.conf
     command: [ "redis-server", "/etc/redis/redis.conf" ]
     network_mode: host
@@ -23,7 +23,7 @@ services:
     container_name: node3
     restart: on-failure
     volumes:
-      - ./volume/data:/data
+      - ./volume/data3:/data3
       - ./config/node3/redis.conf:/etc/redis/redis.conf
     command: [ "redis-server", "/etc/redis/redis.conf" ]
     network_mode: host

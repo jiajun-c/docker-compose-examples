@@ -1,0 +1,66 @@
+version: "3"
+services:
+  master:
+    image: redis
+    container_name: master
+    restart: on-failure
+    volumes:
+      - ./volume/data1:/data1
+      - ./config/master1/redis.conf:/etc/redis/redis.conf
+    command: ["redis-server", "/etc/redis/redis.conf"]
+    network_mode: host
+  slave1:
+    image: redis
+    container_name: slave1
+    restart: on-failure
+    volumes:
+      - ./volume/data2:/data2
+      - ./config/slave1/redis.conf:/etc/redis/redis.conf
+    command: [ "redis-server", "/etc/redis/redis.conf" ]
+    network_mode: host
+  slave2:
+    image: redis
+    container_name: slave2
+    restart: on-failure
+    volumes:
+      - ./volume/data3:/data3
+      - ./config/slave2/redis.conf:/etc/redis/redis.conf
+    command: [ "redis-server", "/etc/redis/redis.conf" ]
+    network_mode: host
+
+  sentinel1:
+    image: redis
+    container_name: sentinel1
+    restart: on-failure
+    volumes:
+      - ./config/sentinel1:/etc/redis
+    command: [ "redis-server", "/etc/redis/sentinel.conf", "--sentinel" ]
+    network_mode: host
+    depends_on:
+      - master
+      - slave1
+      - slave2
+  sentinel2:
+    image: redis
+    container_name: sentinel2
+    restart: on-failure
+    volumes:
+      - ./config/sentinel2:/etc/redis
+    command: [ "redis-server", "/etc/redis/sentinel.conf", "--sentinel" ]
+    network_mode: host
+    depends_on:
+      - master
+      - slave1
+      - slave2
+  sentinel3:
+    image: redis
+    container_name: sentinel3
+    restart: on-failure
+    volumes:
+      - ./config/sentinel3:/etc/redis
+    command: [ "redis-server", "/etc/redis/sentinel.conf", "--sentinel" ]
+    network_mode: host
+    depends_on:
+      - master
+      - slave1
+      - slave2
